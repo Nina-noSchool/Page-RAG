@@ -63,6 +63,16 @@ CREATE TABLE IF NOT EXISTS reviews (  -- 每周复盘存档
     week    TEXT,       -- ISO 周标识，如 2026-W44
     content TEXT
 );
+CREATE TABLE IF NOT EXISTS traces (  -- 问答留痕：可观测 + 坏例回流的原料
+    id      INTEGER PRIMARY KEY,
+    created TEXT,
+    kind    TEXT,       -- ask
+    query   TEXT,       -- 用户原始问题
+    mode    TEXT,       -- 检索模式
+    hits    TEXT,       -- JSON：[{source, heading, score}]
+    answer  TEXT,       -- 回答全文
+    rating  TEXT        -- good / bad / NULL（未评）
+);
 """
 
 
@@ -219,6 +229,38 @@ def reset_journey(con: sqlite3.Connection):
 def datetime_now() -> str:
     from datetime import datetime
     return datetime.now().isoformat(timespec="seconds")
+
+
+# ---- 问答留痕 ----
+
+def add_trace(con: sqlite3.Connection, kind: str, query: str, mode: str,
+              hits_json: str, answer: str) -> int:
+    cur = con.execute(
+        "INSERT INTO traces(created, kind, query, mode, hits, answer) VALUES (?,?,?,?,?,?)",
+        (datetime_now(), kind, query, mode, hits_json, answer),
+    )
+    con.commit()
+    return cur.lastrowid
+
+
+def set_trace_rating(con: sqlite3.Connection, trace_id: int, rating: str):
+    con.execute("UPDATE traces SET rating=? WHERE id=?", (rating, trace_id))
+    con.commit()
+
+
+def get_trace(con: sqlite3.Connection, trace_id: int):
+    return con.execute(
+        "SELECT id, created, query, mode, hits, answer, rating FROM traces WHERE id=?",
+        (trace_id,),
+    ).fetchone()
+
+
+def recent_traces(con: sqlite3.Connection, n: int = 5):
+    return con.execute(
+        "SELECT id, created, query, mode, rating, answer FROM traces "
+        "ORDER BY id DESC LIMIT ?",
+        (n,),
+    ).fetchall()
 
 
 def set_meta(con: sqlite3.Connection, key: str, value: str):

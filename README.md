@@ -46,12 +46,14 @@ copy .env.example .env
 .venv\Scripts\python ingest.py
 .venv\Scripts\python ingest.py --contextual
 
-:: 5. 提问
-.venv\Scripts\python ask.py 口语很差怎么练
-.venv\Scripts\python ask.py                        :: 交互模式，支持多轮追问
-.venv\Scripts\python ask.py --rewrite              :: 追问自动改写成独立查询再检索
-.venv\Scripts\python ask.py --no-llm 证据卡        :: 只看检索命中，不调用任何模型
-.venv\Scripts\python ask.py --mode bm25 证据卡     :: 对比 vector / bm25 / hybrid
+:: 5. 提问与留痕
+.venv\Scripts\python ask.py 口语很差怎么练     :: 每次问答自动留痕（问题/命中/答案入库）
+.venv\Scripts\python ask.py --log 5           :: 回看最近 5 条留痕
+.venv\Scripts\python ask.py --rate 3 bad --note "命中对但答案泛"   :: 打标；bad 自动回流进评测题库
+.venv\Scripts\python eval.py                  :: 主榜 + 真实坏例区一起看（真实坏例补 expect 后计分）
+.venv\Scripts\python ask.py --rewrite         :: 交互模式，支持多轮追问
+.venv\Scripts\python ask.py --no-llm 证据卡   :: 只看检索命中，不调用任何模型
+.venv\Scripts\python ask.py --mode bm25 证据卡 :: 对比 vector / bm25 / hybrid
 
 :: 6. 评测（改动任何参数后跑一遍，分数不应下降）
 .venv\Scripts\python eval.py

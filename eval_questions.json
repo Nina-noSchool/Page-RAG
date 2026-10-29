@@ -1,0 +1,114 @@
+{
+  "curated": [
+    {
+      "q": "口语很差怎么练",
+      "expect": [
+        "5-speaking"
+      ]
+    },
+    {
+      "q": "背了就忘，词汇量上不去怎么办",
+      "expect": [
+        "2-vocabulary",
+        "rhythm"
+      ]
+    },
+    {
+      "q": "CEFR 自测怎么定目标",
+      "expect": [
+        "0-cefr"
+      ]
+    },
+    {
+      "q": "怎么用 AI 练英语",
+      "expect": [
+        "7-ai"
+      ]
+    },
+    {
+      "q": "90 天计划怎么制定",
+      "expect": [
+        "90-day-plan"
+      ]
+    },
+    {
+      "q": "每周复盘要看哪些东西",
+      "expect": [
+        "weekly-review"
+      ]
+    },
+    {
+      "q": "注意力涣散学不进去",
+      "expect": [
+        "3-attention-and-judgment"
+      ]
+    },
+    {
+      "q": "听力听不懂语速快的材料",
+      "expect": [
+        "3-listening"
+      ]
+    },
+    {
+      "q": "情绪低落焦虑影响学习怎么办",
+      "expect": [
+        "depression-anxiety"
+      ]
+    },
+    {
+      "q": "语法要不要专门学",
+      "expect": [
+        "grammar"
+      ]
+    },
+    {
+      "q": "证据卡是什么",
+      "expect": [
+        "证据卡"
+      ]
+    },
+    {
+      "q": "写作怎么找真实读者",
+      "expect": [
+        "6-writing"
+      ]
+    },
+    {
+      "q": "三天打鱼两天晒网没有节奏",
+      "expect": [
+        "rhythm",
+        "discipline",
+        "consistency"
+      ]
+    },
+    {
+      "q": "程序员应该背哪些单词表",
+      "expect": [
+        "词表",
+        "2-vocabulary"
+      ]
+    },
+    {
+      "q": "怎么核对 AI 给的翻译对不对",
+      "expect": [
+        "7-ai"
+      ]
+    },
+    {
+      "q": "原版书读不下去怎么办",
+      "expect": [
+        "4-reading"
+      ]
+    }
+  ],
+  "real": [
+    {
+      "q": "证据卡怎么用",
+      "expect": [
+        "证据卡",
+        "evidence"
+      ],
+      "note": "命中对了但答案泛，想要证据卡的具体例子"
+    }
+  ]
+}
